@@ -8,9 +8,11 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 复制项目文件并以可编辑模式安装
-COPY olah /app/olah
-RUN pip install --no-cache-dir -e /app/olah
+# 复制项目代码到容器中
+COPY . /app
+
+# 安装项目以使 olah-cli 命令可用
+RUN pip install --no-cache-dir -e .
 
 # 暴露默认端口
 EXPOSE 8090
